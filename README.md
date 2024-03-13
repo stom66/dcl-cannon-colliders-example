@@ -17,14 +17,14 @@ You can download the Blender plugin here: [Decentraland Toolkit: Cannon Collider
 ## Examples:
 
 #### TypeScript
-See [`loadJsonColliders.ts`](/tree/main/src/loadJsonColliders.ts) for the TypeScript example of loading the JSON and creating the different types of collider. The following collider types are supported: `BOX`, `SPHERE`, and `MESH`. 
+See [`loadJsonColliders.ts`](src/loadJsonColliders.ts) for the TypeScript example of loading the JSON and creating the different types of collider. The following collider types are supported: `BOX`, `SPHERE`, and `MESH`. 
 
 ### Blender
 The blend files used to generate the collider JSON are also included. 
 
-* [assets/basic-colliders.blend](/tree/main/assets/basic-colliders.blend) - a simple example of the basic supported shapes
+* [assets/basic-colliders.blend](assets/basic-colliders.blend) - a simple example of the basic supported shapes
 
-* [assets/skate-park.blend](/tree/main/assets/skate-park.blend) - a low-poly skatepark which contains a number of more complex colliders. Note that `MESH` colliders are computationally expensive, so simpler `BOX` colliders are used where possible for optimisation
+* [assets/skate-park.blend](assets/skate-park.blend) - a low-poly skatepark which contains a number of more complex colliders. Note that `MESH` colliders are computationally expensive, so simpler `BOX` colliders are used where possible for optimisation
 
 
 
