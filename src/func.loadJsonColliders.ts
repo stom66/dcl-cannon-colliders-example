@@ -9,9 +9,9 @@ interface Collider {
 	friction   : number,
 	restitution: number,
 	mass       : number,
-    radius?    : number,   // Only present for SPHERE colliders
-    dimensions?: number[], // Only present for BOX colliders
-    rotation?  : number[], // Only present for BOX colliders
+	radius?    : number,   // Only present for SPHERE colliders
+	dimensions?: number[], // Only present for BOX colliders
+	rotation?  : number[], // Only present for BOX colliders
 	vertices?  : number[], // Only present for MESH colliders
 	indices?   : number[], // Only present for MESH colliders
 }
@@ -20,10 +20,10 @@ export function loadCollidersFromJSON(
 	world: CANNON.World
 ): void {
 
-	// Parse the JSON file as an array of ColliderData objects
+	// Parse the JSON file as an array of Collider objects
 	const colliderData: Collider[] = colliderJSON as Collider[];
 
-	// Loop through each collider in the array and create the appropraite shape
+	// Loop through each collider in the array and create the appropriate shape
 	colliderData.forEach((collider, index) => {
 
 		console.log("Creating collider ", index, collider.obj_name, collider)
@@ -51,7 +51,6 @@ export function loadCollidersFromJSON(
 
 		// BOX Collider
 		if (collider.shape == "BOX" && collider.dimensions && collider.rotation) {
-			console.log("Adding BOX collider")
 
 			// Create the box shape. Note Box constructor takes half lengths
 			const boxShape = new CANNON.Box(new CANNON.Vec3(
@@ -69,7 +68,6 @@ export function loadCollidersFromJSON(
 				'XYZ' // Specify Euler angle order
 			);
 			cannonObj.quaternion.copy(quaternion)
-			
 
 			// Add it to the object, and add the object to the world
 			cannonObj.addShape(boxShape);
@@ -78,7 +76,6 @@ export function loadCollidersFromJSON(
 
 		// Handle SPHERE collider
 		else if (collider.shape == "SPHERE" && collider.radius) {
-			console.log("Adding SPHERE collider") 
 
 			// Create a sphere - pretty simple.
 			const sphereShape = new CANNON.Sphere(collider.radius);
@@ -90,7 +87,6 @@ export function loadCollidersFromJSON(
 
 		// Handle MESH colliders
 		else if (collider.shape == "MESH" && collider.vertices && collider.indices) {
-			console.log("Adding MESH collider")
 
 			// Set up the trimesh
 			const trimesh = new CANNON.Trimesh(collider.vertices, collider.indices)
