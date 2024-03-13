@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "allowJs"          : true,
+    "strict"           : true,
+    "esModuleInterop"  : true,
+    "resolveJsonModule": true,
+    "types"            : ["three"],
+    "target"           : "es2015",
+    "lib"              : ["dom", "es2015"], // Add "dom" to the list of libraries
+  },
+  "include": [
+    "src/**/*.ts",
+  ],
+  "extends": "@dcl/sdk/types/tsconfig.ecs7.json"
+}
