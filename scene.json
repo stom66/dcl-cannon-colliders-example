@@ -2,15 +2,14 @@
 	"ecs7": true,
 	"runtimeVersion": "7",
 	"display": {
-		"title": "SDK7 Scene Template",
-		"description": "template scene with SDK7",
+		"title": "Cannon Collider Example",
+		"description": "Example of importing cannon colliders from JSON with SDK7",
 		"navmapThumbnail": "images/scene-thumbnail.png",
 		"favicon": "favicon_asset"
 	},
 	"owner": "",
 	"contact": {
-		"name": "SDK",
-		"email": ""
+		"name": "stom"
 	},
 	"main": "bin/index.js",
 	"tags": [],

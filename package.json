@@ -1,7 +1,7 @@
 {
-  "name": "dcl-project",
+  "name": "dcl-cannon-colliders-example",
   "version": "1.0.0",
-  "description": "SDK7 Template scene",
+  "description": "DCL Cannon Collider Example",
   "scripts": {
     "start": "sdk-commands start",
     "deploy": "sdk-commands deploy",
