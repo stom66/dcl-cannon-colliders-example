@@ -103,7 +103,7 @@ export function main() {
 	const vectorScale: number = 25
 
 	// Setup the spawn positions. We want 4 above the ramps, and 4 above the cubes.
-	const positions: any = [
+	const positions: any = [ 
 		Vector3.create(2, 8, 3),
 		Vector3.create(6, 8, 3),
 		Vector3.create(10, 8, 3),
@@ -111,7 +111,7 @@ export function main() {
 		Vector3.create(2, 8, 10),
 		Vector3.create(6, 8, 13),
 		Vector3.create(10, 8, 14.4),
-		Vector3.create(14, 8, 13),
+		Vector3.create(14, 10, 10),
 	]
 
 	// Create the balls at the specified positions
@@ -183,7 +183,7 @@ export function main() {
 		Vector3.create(2, 8, 14.5),
 		Vector3.create(6, 8, 14.5),
 		//Vector3.create(10, 8, 13),
-		Vector3.create(14, 8, 14.5),
+		Vector3.create(14, 12, 8),
 	]
 
 	// Create the cubes at the specified positions
