@@ -60,19 +60,16 @@ export function loadCollidersFromJSON(
 			  ));
 
 			// Convert and apply rotation
-			const quaternion = new CANNON.Quaternion();
-			quaternion.setFromEuler(
-				collider.rotation[0], // x
-				collider.rotation[1], // y
-				collider.rotation[2], // z
-				'XYZ' // Specify Euler angle order
-			);
-			cannonObj.quaternion.copy(quaternion)
+            const quat = new CANNON.Quaternion(collider.rotation[0], 
+				collider.rotation[1], 
+				collider.rotation[2], 
+				collider.rotation[3]);
+			cannonObj.quaternion.copy(quat)
 
 			// Add it to the object, and add the object to the world
 			cannonObj.addShape(boxShape);
 			world.addBody(cannonObj); 
-		}
+		} 
 
 		// Handle SPHERE collider
 		else if (collider.shape == "SPHERE" && collider.radius) {
