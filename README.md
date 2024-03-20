@@ -17,7 +17,7 @@ You can download the Blender plugin here: [Decentraland Toolkit: Cannon Collider
 ## Examples:
 
 #### TypeScript
-See [`func.loadJsonColliders.ts`](src/func.loadJsonColliders.ts) for the TypeScript example of loading the JSON and creating the different types of collider. The following collider types are supported: `BOX`, `SPHERE`, and `MESH`. 
+See [`func.collidersFromJSON.ts`](src/func.collidersFromJSON.ts) for the TypeScript example of loading the JSON and creating the different types of collider. The following collider types are supported: `BOX`, `SPHERE`, and `MESH`. 
 
 ### Blender
 The blend files used to generate the collider JSON are also included. 
