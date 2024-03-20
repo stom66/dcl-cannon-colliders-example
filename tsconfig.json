@@ -6,7 +6,7 @@
     "resolveJsonModule": true,
     "types"            : ["three"],
     "target"           : "es2015",
-    "lib"              : ["dom", "es2015"], // Add "dom" to the list of libraries
+    "lib"              : ["dom", "es2015"],
   },
   "include": [
     "src/**/*.ts",
