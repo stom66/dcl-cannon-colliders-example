@@ -5,7 +5,9 @@ import { Animator, AudioSource, AvatarAttach, ColliderLayer, GltfContainer, Inpu
 import CANNON from 'cannon';
 import { loadColliders } from './func.wallCollidersSetup'
 import { Ball } from './class.ball'
-import { loadCollidersFromJSON } from './func.loadJsonColliders';
+
+import { collidersFromJSON } from './func.collidersFromJSON';
+import colliderJSON from './colliders-basic.json'
 
 /*
 
@@ -38,11 +40,11 @@ export function main() {
 		rotation: Quaternion.fromEulerDegrees(0, 180, 0)
 	})
 	GltfContainer.create(entity, {
-		src: 'assets/glb/basic-colliders.glb', 
+		src: 'assets/glb/basic-colliders.glb',
 	})
 
 
-	
+
 	//  ██████╗ █████╗ ███╗   ██╗███╗   ██╗ ██████╗ ███╗   ██╗    ██╗    ██╗ ██████╗ ██████╗ ██╗     ██████╗ 
 	// ██╔════╝██╔══██╗████╗  ██║████╗  ██║██╔═══██╗████╗  ██║    ██║    ██║██╔═══██╗██╔══██╗██║     ██╔══██╗
 	// ██║     ███████║██╔██╗ ██║██╔██╗ ██║██║   ██║██╔██╗ ██║    ██║ █╗ ██║██║   ██║██████╔╝██║     ██║  ██║
@@ -95,10 +97,10 @@ export function main() {
 	// ██████╔╝██║  ██║███████╗███████╗███████║
 	// ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝
 	//                                         
-	const balls      : Ball[]        = [] // Store the balls
-	const ballBodies : CANNON.Body[] = [] // Store ball bodies
-	let forwardVector: Vector3       = Vector3.rotate(Vector3.Forward(), Transform.get(engine.CameraEntity).rotation) // Camera's forward vector
-	const vectorScale: number        = 25
+	const balls: Ball[] = [] // Store the balls
+	const ballBodies: CANNON.Body[] = [] // Store ball bodies
+	let forwardVector: Vector3 = Vector3.rotate(Vector3.Forward(), Transform.get(engine.CameraEntity).rotation) // Camera's forward vector
+	const vectorScale: number = 25
 
 	// Setup the spawn positions. We want 4 above the ramps, and 4 above the cubes.
 	const positions: any = [
@@ -106,12 +108,12 @@ export function main() {
 		Vector3.create(6, 8, 3),
 		Vector3.create(10, 8, 3),
 		Vector3.create(14, 8, 3),
-		Vector3.create(2, 8, 13),
+		Vector3.create(2, 8, 10),
 		Vector3.create(6, 8, 13),
-		Vector3.create(10, 8, 13),
+		Vector3.create(10, 8, 14.4),
 		Vector3.create(14, 8, 13),
 	]
-	
+
 	// Create the balls at the specified positions
 	for (let i = 0; i < positions.length; i++) {
 
@@ -119,19 +121,19 @@ export function main() {
 		const ball = new Ball('assets/glb/ball.glb', {
 			position: positions[i],
 			rotation: Quaternion.Zero(),
-			scale   : Vector3.One()
+			scale: Vector3.One()
 		})
 		balls.push(ball)
- 
+
 		// Add the cannon ball body
 		const ballBody: CANNON.Body = new CANNON.Body({
-			mass    : 5, // kg
+			mass: 5, // kg
 			position: new CANNON.Vec3(positions[i].x, positions[i].y, positions[i].z),
-			shape   : new CANNON.Sphere(0.5) 
+			shape: new CANNON.Sphere(0.5)
 		})
 
-		ballBody.material       = ballPhysicsMaterial // Add bouncy material to ball body
-		ballBody.linearDamping  = 0.0 // Round will keep translating even with friction so you need linearDamping
+		ballBody.material = ballPhysicsMaterial // Add bouncy material to ball body
+		ballBody.linearDamping = 0.0 // Round will keep translating even with friction so you need linearDamping
 		ballBody.angularDamping = 0.4 // Round bodies will keep rotating even with friction so you need angularDamping
 
 		world.addBody(ballBody) // Add body to the world
@@ -141,8 +143,8 @@ export function main() {
 		pointerEventsSystem.onPointerDown(
 			{
 				entity: ball.entity,
-				opts  : {
-					button   : InputAction.IA_POINTER,
+				opts: {
+					button: InputAction.IA_POINTER,
 					hoverText: 'kick'
 				}
 			},
@@ -172,18 +174,18 @@ export function main() {
 	// ╚██████╗╚██████╔╝██████╔╝███████╗███████║
 	//  ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝╚══════╝
 	//                                          
-	                                      
-	const cubes      : Ball[]        = [] // Store the cubes
-	const cubeBodies : CANNON.Body[] = [] // Store cube bodies
+
+	const cubes: Ball[] = [] // Store the cubes
+	const cubeBodies: CANNON.Body[] = [] // Store cube bodies
 
 	// Setup the spawn positions. We want 4 above the ramps, and 4 above the cubes.
 	const cubePositions: any = [
-		Vector3.create(2,  8, 14.5),
-		Vector3.create(6,  8, 14.5),
-		Vector3.create(10, 8, 14.5),
+		Vector3.create(2, 8, 14.5),
+		Vector3.create(6, 8, 14.5),
+		//Vector3.create(10, 8, 13),
 		Vector3.create(14, 8, 14.5),
 	]
-	
+
 	// Create the cubes at the specified positions
 	for (let i = 0; i < cubePositions.length; i++) {
 
@@ -191,19 +193,19 @@ export function main() {
 		const cube = new Ball('assets/glb/cube.glb', {
 			position: cubePositions[i],
 			rotation: Quaternion.Zero(),
-			scale   : Vector3.One()
+			scale: Vector3.One()
 		})
 		cubes.push(cube)
- 
+
 		// Add the cannon cube body
 		const cubeBody: CANNON.Body = new CANNON.Body({
-			mass    : 5, // kg
+			mass: 5, // kg
 			position: new CANNON.Vec3(cubePositions[i].x, cubePositions[i].y, cubePositions[i].z)
 		})
-		cubeBody.addShape(new CANNON.Box(new CANNON.Vec3(0.5, 0.5, 0.5) ))
+		cubeBody.addShape(new CANNON.Box(new CANNON.Vec3(0.5, 0.5, 0.5)))
 
-		cubeBody.material       = ballPhysicsMaterial // Add bouncy material to ball body
-		cubeBody.linearDamping  = 0.0 // Round will keep translating even with friction so you need linearDamping
+		cubeBody.material = ballPhysicsMaterial // Add bouncy material to ball body
+		cubeBody.linearDamping = 0.0 // Round will keep translating even with friction so you need linearDamping
 		cubeBody.angularDamping = 0.4 // Round bodies will keep rotating even with friction so you need angularDamping
 
 		world.addBody(cubeBody) // Add body to the world
@@ -220,7 +222,7 @@ export function main() {
 	//  ╚════╝ ╚══════╝ ╚═════╝ ╚═╝  ╚═══╝     ╚═════╝ ╚═════╝ ╚══════╝╚══════╝╚═╝╚═════╝ ╚══════╝╚═╝  ╚═╝╚══════╝
 	//                                                                                                            
 
-	loadCollidersFromJSON(world);
+	collidersFromJSON(colliderJSON, world);
 
 
 
@@ -231,7 +233,7 @@ export function main() {
 	// ╚██████╔╝██║     ██████╔╝██║  ██║   ██║   ███████╗
 	//  ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
 	//                                                   
-	
+
 	const fixedTimeStep: number = 1.0 / 60 // seconds
 	const maxSubSteps: number = 10
 
@@ -242,7 +244,7 @@ export function main() {
 
 		// Position and rotate the balls in the scene to match their cannon world counterparts
 		for (let i = 0; i < balls.length; i++) {
-			const ballTransform    = Transform.getMutable(balls[i].entity)
+			const ballTransform = Transform.getMutable(balls[i].entity)
 			if (ballTransform && ballTransform.position) {
 				ballTransform.position = ballBodies[i].position
 				ballTransform.rotation = ballBodies[i].quaternion
@@ -252,7 +254,7 @@ export function main() {
 
 		// Position and rotate the cubes in the scene to match their cannon world counterparts
 		for (let i = 0; i < cubes.length; i++) {
-			const cubeTransform    = Transform.getMutable(cubes[i].entity)
+			const cubeTransform = Transform.getMutable(cubes[i].entity)
 			if (cubeTransform && cubeTransform.position) {
 				cubeTransform.position = cubeBodies[i].position
 				cubeTransform.rotation = cubeBodies[i].quaternion
