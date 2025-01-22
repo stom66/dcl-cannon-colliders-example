@@ -8,3 +8,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 *.blend[0-9]
+
+
+# Ignore specific file types in test-files directory
+assets/*sliced/*

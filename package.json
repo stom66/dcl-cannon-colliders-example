@@ -11,8 +11,8 @@
   },
   "devDependencies": {
     "@dcl/asset-packs": "latest",
-    "@dcl/js-runtime": "7.4.3",
-    "@dcl/sdk": "^7.4.3",
+    "@dcl/js-runtime": "7.4.9",
+    "@dcl/sdk": "^7.4.9",
     "@types/three": "^0.161.2",
     "@types/webxr": "^0.5.14",
     "typescript": "^5.3.3"
